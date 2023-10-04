@@ -1,0 +1,479 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+	<!-- basic -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- mobile metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	<!-- site metas -->
+	<title>View Cart</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- bootstrap css -->
+	<link rel="stylesheet" type="text/css" href="css/user/bootstrap.min.css">
+	<!-- style css -->
+	<link rel="stylesheet" type="text/css" href="css/user/style.css">
+	<!-- Login/Register Page -->
+	<link rel="stylesheet" type="text/css" href="css/user/login.css">
+	<!-- Responsive-->
+	<link rel="stylesheet" href="css/user/responsive.css">
+	<!-- fevicon -->
+	<link rel="icon" href="images/fevicon.png" type="image/gif" />
+	<!-- Scrollbar Custom CSS -->
+	<link rel="stylesheet" href="css/user/jquery.mCustomScrollbar.min.css">
+	<!-- Tweaks for older IEs-->
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- font awesome -->
+	<link rel="stylesheet" type="text/css"
+		href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- unicorn -->
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+	<!-- owl stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext"
+		rel="stylesheet">
+	<link rel="stylesheet" href="css/user/owl.carousel.min.css">
+	<link rel="stylesoeet" href="css/user/owl.theme.default.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+		media="screen">
+</head>
+
+<body>
+	<!-- banner bg main start -->
+	<div class="banner_bg_main">
+		<!-- header top section start -->
+		<div class="container">
+			<div class="header_section_top">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="custom_menu">
+							<ul>
+								<li><a href="#">Best Sellers</a></li>
+								<li><a href="#">Gift Ideas</a></li>
+								<li><a href="#">New Releases</a></li>
+								<li><a href="#">Today's Deals</a></li>
+								<li><a href="#">Customer Service</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- header top section start -->
+		<!-- logo section start -->
+		<div class="logo_section">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="logo"><a href="index.html">Online Jewellery</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- logo section end -->
+		<!-- header section start -->
+		<div class="header_section">
+			<div class="container">
+				<div class="containt_main">
+					<div id="mySidenav" class="sidenav">
+						<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+						<a href="/">Home</a>
+						<a href="#">Category</a>
+						<a href="#">Account</a>
+						<a href="#">Orders</a>
+						<a href="#">Contact</a>
+						<a href="#">About Us</a>
+					</div>
+					<span class="toggle_icon" onclick="openNav()"><img src="images/toggle-icon.png"></span>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category
+						</button>
+						<!-- This is to show all the category and sub category of the jewellery -->
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a href="" th:each="category, iStat : ${categories}"
+								th:href="@{/shop/category/{id}(id=${category.id})}">
+								<li class="dropdown-item" th:text="${category.name}"></li>
+							</a>
+
+						</div>
+
+
+					</div>
+					<div class="main">
+						<!-- Another variation with a button -->
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search this blog">
+							<div class="input-group-append">
+								<button class="btn btn-secondary" type="button"
+									style="background-color: #f26522; border-color:#f26522 ">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="header_box">
+						<div class="login_menu">
+							<ul>
+								<li><a href="/cart">
+										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+										<span class="padding_10">Cart</span></a>
+								</li>
+								<li><a href="#">
+										<i class="fa fa-heart" aria-hidden="true"></i>
+										<span class="padding_10">WishList</span></a>
+								</li>
+								<li><a href="#" sec:authorize="isAnonymous()">
+										<i class="fa fa-user" aria-hidden="true"></i>
+										<span class="padding_10" id="form-open"> Login</span></a>
+								</li>
+
+								<li><a th:href="@{/user/logout}" sec:authorize="isAuthenticated()">
+										<i class="fa fa-user" aria-hidden="true"></i>
+										<span class="padding_10" id="logout"> logout</span></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- header section end -->
+		<!-- banner section start -->
+		<div class="banner_section layout_padding">
+			<div class="container">
+				<div id="my_slider" class="carousel slide" data-ride="carousel">
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-sm-12">
+								<h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+								<div class="buynow_bt"><a href="#">Buy Now</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="row">
+								<div class="col-sm-12">
+									<h1 class="banner_taital">Happiness Comes <br>in The Box of jewellery</h1>
+									<div class="buynow_bt"><a href="#">Buy Now</a></div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="row">
+								<div class="col-sm-12">
+									<h1 class="banner_taital">Eternnal Beauty<br>With All the things Attached</h1>
+									<div class="buynow_bt"><a href="#">Buy Now</a></div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="row">
+								<div class="col-sm-12">
+									<h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+									<div class="buynow_bt"><a href="#">Buy Now</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+						<i class="fa fa-angle-left"></i>
+					</a>
+					<a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+						<i class="fa fa-angle-right"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- banner section end -->
+	</div>
+	<!-- banner bg main end -->
+
+	<main>
+		<div class="container">
+
+			<!--Section: Block Content-->
+			<section class="mt-5 mb-4">
+
+				<!--Grid row-->
+				<div class="row">
+
+					<!--Grid column-->
+					<div class="col-lg-8">
+
+						<!-- Card -->
+						<div class="card wish-list mb-4">
+							<div class="card-body">
+
+								<h5 class="mb-4">Cart (<span th:text="${cartCount}">2</span> items)</h5>
+
+								<div class="row mb-4" th:each="item, iStat : ${cart}">
+									<div class="col-md-5 col-lg-3 col-xl-3">
+										<div class="mb-3 mb-md-0">
+											<img class="img-fluid w-100"
+												th:src="@{${'/productImages/' + item.imageName}}"
+												src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
+												alt="Sample">
+
+										</div>
+									</div>
+									<div class="col-md-7 col-lg-9 col-xl-9">
+										<div>
+											<div class="d-flex justify-content-between">
+												<div>
+													<h5 th:text="${item.name}">Blue denim shirt</h5>
+													<p class="mb-3 text-uppercase small">Weight: <span
+															th:text="${item.weight}"></span> grams</p>
+													<!--                                                <p class="mb-2 text-uppercase small">Category: <span th:text="${item.category.name}"></span></p>-->
+
+												</div>
+
+											</div>
+											<div class="mt-5 d-flex justify-content-between align-items-center">
+												<div>
+													<a href="#!"
+														th:href="@{/cart/removeItem/{index}(index=${iStat.index})}"
+														type="button"
+														class="card-link-secondary small text-uppercase mr-3"><i
+															class="fas fa-trash-alt mr-1"></i> Remove item </a>
+
+												</div>
+												<p class="mb-0"><span><strong>₹<span
+																th:text="${item.price}"></span></strong></span></p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr class="mb-4">
+
+								<p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i> Do not delay the
+									purchase, adding
+									items to your cart does not mean booking them.</p>
+
+							</div>
+						</div>
+					</div>
+					<!--Grid column-->
+
+					<!--Grid column-->
+					<div class="col-lg-4">
+
+						<!-- Card -->
+						<div class="card mb-4">
+							<div class="card-body">
+
+								<h5 class="mb-3">The total amount </h5>
+
+								<ul class="list-group list-group-flush">
+									<li
+										class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+										Amount Payable
+										<span>₹<span th:text="${total}"></span></span>
+									</li>
+									<li class="list-group-item d-flex justify-content-between align-items-center px-0">
+										Shipping
+										<span>Gratis</span>
+									</li>
+									<li
+										class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+										<div>
+											<strong>The total amount of</strong>
+											<strong>
+												<p class="mb-0">(including VAT)</p>
+											</strong>
+										</div>
+										<span><strong>₹<span th:text="${total}"></span></strong></span>
+									</li>
+								</ul>
+
+
+
+								<a th:href="@{/checkout}" h class="btn btn-primary btn-block waves-effect waves-light"
+									sec:authorize="isAuthenticated()">go to
+									checkout</a>
+								<button class="btn btn-primary btn-block waves-effect waves-light" disabled
+									sec:authorize="isAnonymous()">
+									go to
+									checkout</button>
+
+							</div>
+						</div>
+						<!-- Card -->
+
+						<!-- Card -->
+						<div class="card mb-4">
+							<div class="card-body">
+
+								<a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse"
+									href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+									Add a discount code (optional)
+									<span><i class="fas fa-chevron-down pt-1"></i></span>
+								</a>
+
+								<div class="collapse" id="collapseExample">
+									<div class="mt-3">
+										<div class="md-form md-outline mb-0">
+											<input type="text" id="discount-code" class="form-control font-weight-light"
+												placeholder="Enter discount code">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Card -->
+
+					</div>
+					<!--Grid column-->
+
+				</div>
+				<!--Grid row-->
+
+			</section>
+			<!--Section: Block Content-->
+
+		</div>
+	</main>
+	<div class="footer_section layout_padding">
+		<div class="container">
+			<div class="footer_logo"><a href="index.html"><img src="images/footer-logo.png"></a></div>
+			<div class="input_bt">
+				<input type="text" class="mail_bt" placeholder="Your Email" name="Your Email">
+				<span class="subscribe_bt" id="basic-addon2"><a href="#">Subscribe</a></span>
+			</div>
+			<div class="footer_menu">
+				<ul>
+					<li><a href="#">Best Sellers</a></li>
+					<li><a href="#">Gift Ideas</a></li>
+					<li><a href="#">New Releases</a></li>
+					<li><a href="#">Today's Deals</a></li>
+					<li><a href="#">Customer Service</a></li>
+				</ul>
+			</div>
+			<div class="location_main">Help Line Number : <a href="#">+1 1800 1200 1200</a></div>
+		</div>
+	</div>
+
+	<!-- Adding dynamic login and signup page -->
+	<section class="home">
+		<div class="form_container">
+			<i class="uil uil-times form_close"></i>
+			<!-- Login From -->
+			<div class="form login_form">
+				<form th:action="@{/user/login}" method="post">
+					<h2>Login</h2>
+
+					<div class="input_box">
+						<input minlength="6" placeholder="Email" name="email" id="email" aria-describedby="emailHelp"
+							required />
+						<i class="uil uil-envelope-alt email"></i>
+					</div>
+					<div class="input_box">
+						<input type="password" name="password" id="password" placeholder="Enter your password"
+							required />
+						<i class="uil uil-lock password"></i>
+						<i class="uil uil-eye-slash pw_hide"></i>
+					</div>
+
+					<div class="option_field">
+						<span class="checkbox">
+							<input type="checkbox" id="check" />
+							<label for="check">Remember me</label>
+						</span>
+						<a href="#" class="forgot_pw">Forgot password?</a>
+					</div>
+
+					<button class="button">Login Now</button>
+
+					<div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+				</form>
+			</div>
+
+			<!-- Signup From -->
+			<div class="form signup_form">
+				<form th:action="@{/saveuser}" th:object="${user}" method="post">
+					<h2>Signup</h2>
+
+					<div class="input_box">
+						<i class="fa fa-user"></i>
+						<input type="text" name="firstName" id="firstName" placeholder="Enter your First Name"
+							required />
+
+					</div>
+					<div class="input_box">
+						<i class="fa fa-user"></i>
+						<input type="text" name="lastName" id="lastName" placeholder="Enter your Last Name" />
+
+					</div>
+					<div class="input_box">
+						<input type="email" minlength="6" placeholder="Email" name="email" id="email"
+							aria-describedby="emailHelp" required />
+						<i class="uil uil-envelope-alt email"></i>
+					</div>
+					<div class="input_box">
+						<input type="password" name="password" id="password" <i class="uil uil-lock password"></i>
+						<i class="uil uil-eye-slash pw_hide"></i>
+					</div>
+
+					<button class="button">Signup Now</button>
+
+					<div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- footer section end -->
+	<!-- copyright section start -->
+	<div class="copyright_section">
+		<div class="container">
+			<p class="copyright_text">© 2020 All Rights Reserved. Design by <a href="https://html.design">Free html
+					Templates</a></p>
+		</div>
+	</div>
+	<!-- copyright section end -->
+	<!-- Javascript files-->
+	<script src="js/user/jquery.min.js"></script>
+	<script src="js/user/popper.min.js"></script>
+	<script src="js/user/bootstrap.bundle.min.js"></script>
+	<script src="js/user/jquery-3.0.0.min.js"></script>
+	<script src="js/user/plugin.js"></script>
+	<script src="js/user/login.js"></script>
+
+
+	<!-- sidebar -->
+	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="js/custom.js"></script>
+	<script>
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "250px";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+		}
+	</script>
+</body>
+
+</html>t src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<script>
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	function closeNav() {
+		document.getElementById("mySidenav").style.width = "0";
+	}
+</script>
+</body>
+
+</html>

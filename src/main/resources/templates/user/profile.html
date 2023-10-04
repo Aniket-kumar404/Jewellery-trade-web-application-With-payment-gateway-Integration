@@ -1,0 +1,163 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" th:href="@{/css/user/profile.css}">
+    <title>View Product</title>
+</head> 
+<body>
+
+
+    <header>
+		<a href="#" class="logo"><img th:src="@{/images/logo/logo.jpg}" alt="" width="60" height="40"></a>
+
+		<ul class="navmenu">
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Shop</a></li>
+			<li><a href="#">Products</a></li>
+			<li><a href="#">Contact Us</a></li>
+			<li><a href="#">About Us</a></li>
+		</ul>
+
+	
+		<div class="nav-icon">
+			<a href="#"><i class="fa fa-search" style="font-size:24px"></i></a>
+
+			<a href="/cart"><i class="fa fa-shopping-cart" > </i></a>
+      
+
+			<a href="#" id="form-open" style=" color:black; " sec:authorize="isAnonymous()">Login / Register</a>
+
+			<div class="dropdown" sec:authorize="isAuthenticated()">
+			
+				<a href="#" onclick="myFunction()" class="dropbtn">My Account</a>
+				<div id="myDropdown" class="dropdown-content">
+				  <a href="#home">My Profile</a>
+				  <a href="#about"><a  href="/user/profile">Update Profile</a></a>
+				  <a href="#contact"><a th:href="@{/user/logout}">Logout</a></a>
+				</div>
+			  </div>
+		</div>
+	</header><br><br><br><br>
+  <div class="container">
+    <nav class="side-nav">
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="#"><i class="fas fa-tachometer-alt"></i><span class="menu-text">Dashboard</span></a></li>
+        <li class="nav-item"><a href="#"><i class="fas fa-user"></i><span class="menu-text">Users</span></a></li>
+        <li class="nav-item active"><a href="#"><i class="fas fa-file-alt"></i><span class="menu-text">Posts</span></a></li>
+        <li class="nav-item"><a href="#"><i class="fas fa-play "></i><span class="menu-text">Media</span></a></li>
+        <li class="nav-item"><a href="#"><i class="fas fa-sign-out-alt"></i><span class="menu-text">exit</span></a></li>
+      </ul>
+    </nav>
+  </div>
+  
+
+<section class="contact">
+  <br><br>
+  <div class="contact-info">
+    <br>
+    <div class="first-info">
+  
+      
+
+      <p>3245 Grant Street Longview, <br> TX united kingdom 765378</p>
+      <p>123456789</p>
+      <p>aniketkumar@gmail.com</p>
+
+      <div class="social-icon">
+        <a href="#"><i class='bx bxl-facebook'></i></a>
+        <a href="#"><i class='bx bxl-twitter'></i></a>
+        <a href="#"><i class='bx bxl-instagram'></i></a>
+        <a href="#"><i class='bx bxl-youtube'></i></a>
+        <a href="#"><i class='bx bxl-linkedin'></i></a>
+      </div>
+    </div>
+
+    <div class="second-info">
+      <h4>Support</h4>
+      <p>Contact us</p>
+      <p>About page</p>
+      <p>Size Guide</p>
+      <p>Shopping & Resturns</p>
+      <p>Privacy</p>
+    </div>
+
+    <div class="third-info">
+      <h4>Shop</h4>
+      <p>Men's Shopping</p>
+      <p>Women's Shopping</p>
+      <p>Kids's Shopping</p>
+      <p>Furniture</p>
+      <p>Discount</p>
+    </div>
+
+    <div class="fourth-info">
+      <h4>Company</h4>
+      <p>About</p>
+      <p>Blog</p>
+      <p>Affiliate</p>
+      <p>Login</p>
+    </div>
+
+    <div class="five">
+      <h4>Subscribe</h4>
+      <p>Receive Updates, Hot Deals, Discounts Sent Straight In Your Inbox Daily</p>
+      <p>Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Eum, Debitis.</p>
+      <p>Receive Updates, Hot Deals, Discounts Sent Straight In Your Inbox Daily</p>
+    </div>
+  </div>
+</section>
+<div class="end-text">
+  <p>Copyright © @2022. All Rights Reserved.Designd By Aniket Kumar.</p>
+</div>
+<!-- Home -->
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+<script>
+	/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+$(function() {
+			$("li").click(function(e) {
+			  e.preventDefault();
+			  $("li").removeClass("active");
+			  $(this).addClass("active");
+			});
+		});
+</script>
+</html>

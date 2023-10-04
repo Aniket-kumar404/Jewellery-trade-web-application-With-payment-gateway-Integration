@@ -1,0 +1,652 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Jost', sans-serif;
+      list-style: none;
+      text-decoration: none;
+    }
+
+    header {
+      background-color: #ecf0f1;
+      position: fixed;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 10%;
+    }
+
+    .logo img {
+      max-width: 120px;
+      height: auto;
+    }
+
+    .navmenu {
+      display: flex;
+    }
+
+    .navmenu a {
+      color: rgb(0, 0, 0);
+      font-size: 20px;
+      text-transform: capitalize;
+      padding: 10px 20px;
+      font-weight: 400;
+      transition: all .42s ease;
+    }
+
+    .navmenu a:hover {
+      color: #EE1C47;
+    }
+
+    .nav-icon {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-icon i {
+      margin-right: 20px;
+      color: #2c2c2c;
+      font-size: 25px;
+      font-weight: 400;
+      transition: all .42s ease;
+    }
+
+    .nav-icon i:hover {
+      transform: scale(1.1);
+      color: #EE1C47;
+    }
+
+    #menu-icon {
+      font-size: 35px;
+      color: #2c2c2c;
+      z-index: 10001;
+      cursor: pointer;
+    }
+
+    /* contact-section */
+    .contact {
+      background-color: #f3f4f6;
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, auto));
+      gap: 3rem;
+    }
+
+    .first-info img {
+      width: 140px;
+      height: auto;
+    }
+
+    .contact-info h4 {
+      color: #212529;
+      font-size: 14px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .contact-info p {
+      color: #565656;
+      font-size: 14px;
+      font-weight: 400;
+      text-transform: capitalize;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all .42s;
+    }
+
+    .contact-info p:hover {
+      color: #EE1C47;
+    }
+
+    .social-icon i {
+      color: #565656;
+      margin-right: 10px;
+      font-size: 20px;
+      transition: all .42s;
+    }
+
+    .social-icon i:hover {
+      transform: scale(1.3);
+    }
+
+    .end-text {
+      background-color: #edfff1;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .end-text p {
+      color: #111;
+      text-transform: capitalize;
+    }
+
+
+    /* Responsive-css */
+    @media(max-width:890px) {
+      header {
+        padding: 20px 3%;
+        transition: .4s;
+      }
+    }
+
+    @media(max-width:630px) {
+      .main-text h1 {
+        font-size: 50px;
+        transition: .4s;
+      }
+
+      .main-text p {
+        font-size: 18px;
+        transition: .4s;
+      }
+
+      .main-btn {
+        padding: 10px 20px;
+        transition: .4s;
+      }
+    }
+
+    @media(max-width:750px) {
+      .navmenu {
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        width: 300px;
+        height: 130vh;
+        background: #edfff1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 120px 30px;
+        transition: all .42s;
+      }
+
+      .navmenu a {
+        display: block;
+        margin: 18px 0;
+      }
+
+      .navmenu.open {
+        right: 0;
+      }
+    }
+
+    /* dropdown */
+    /*  */
+    .dropbtn {
+
+      color: rgb(0, 0, 0);
+      /* padding: 10px; */
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dropbtn:hover,
+    .dropbtn:focus {
+      /* background-color: #c8dac8; */
+
+    }
+
+    .dropdown {
+      float: right;
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+
+      min-width: 160px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      right: 0;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 6px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown a:hover {
+      color: rgb(233, 56, 56);
+    }
+
+    .show {
+      display: block;
+    }
+
+    .zoom {
+      border: 2px solid #7d8586;
+      box-shadow: 5px 10px #888888;
+      transition: transform .2s;
+      margin: 0 auto;
+    }
+
+    .zoom:hover {
+      -ms-transform: scale(1.5);
+      /* IE 9 */
+      -webkit-transform: scale(1.5);
+      /* Safari 3-8 */
+      transform: scale(1.2);
+    }
+
+    .checked {
+      color: orange;
+    }
+
+    .new_btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 25px 20px 22px;
+      box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+      background-color: #e8e8e8;
+      border-color: #ffe2e2;
+      border-style: solid;
+      border-width: 4px;
+      border-radius: 35px;
+      font-size: 20px;
+      font-weight: 900;
+      color: rgb(134, 124, 124);
+      font-family: monospace;
+      transition: transform 400ms cubic-bezier(.68, -0.55, .27, 2.5),
+        border-color 400ms ease-in-out,
+        background-color 400ms ease-in-out;
+      word-spacing: -2px;
+    }
+
+    @keyframes movingBorders {
+      0% {
+        border-color: #fce4e4;
+      }
+
+      50% {
+        border-color: #ffd8d8;
+      }
+
+      90% {
+        border-color: #fce4e4;
+      }
+    }
+
+    .new_btn:hover {
+      background-color: #eee;
+      transform: scale(105%);
+      animation: movingBorders 3s infinite;
+    }
+
+    .new_btn svg {
+      margin-right: 11px;
+      fill: rgb(255, 110, 110);
+      transition: opacity 100ms ease-in-out;
+    }
+
+    .filled {
+      position: absolute;
+      opacity: 0;
+      top: 20px;
+      left: 22px;
+    }
+
+    @keyframes beatingHeart {
+      0% {
+        transform: scale(1);
+      }
+
+      15% {
+        transform: scale(1.15);
+      }
+
+      30% {
+        transform: scale(1);
+      }
+
+      45% {
+        transform: scale(1.15);
+      }
+
+      60% {
+        transform: scale(1);
+      }
+    }
+
+    .new_btn:hover .empty {
+      opacity: 0;
+    }
+
+    .new_btn:hover .filled {
+      opacity: 1;
+      animation: beatingHeart 1.2s infinite;
+    }
+
+    .fa-cart-plus {
+      background: #0652DD;
+    }
+
+    .addtocart {
+      display: block;
+      padding: 0.5em 1em 0.5em 1em;
+      border-radius: 100px;
+      border: none;
+      font-size: 10px;
+      position: relative;
+      background: #0652DD;
+      cursor: pointer;
+      left: 45%;
+      height: 6%;
+      width: 10%;
+      overflow: hidden;
+      transition: transform 0.1s;
+      z-index: 1;
+    }
+
+    .addtocart:hover {
+      transform: scale(1.1);
+    }
+
+    .pretext {
+      color: #fff;
+      background: #0652DD;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    i {
+      margin-right: 10px;
+    }
+
+    .done {
+      background: #b6522b;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      transition: transform 0.3s ease;
+
+      transform: translate(-110%) skew(-40deg);
+    }
+
+    .posttext {
+      background: #b6522b;
+    }
+
+    .fa-check {
+      background: #b6522b;
+    }
+
+    .New_but
+{
+    width:100%;
+    text-align: center;
+}
+.New_but .inner
+{
+    display: inline-block;
+  padding-left: 10px;
+}
+.New_but .inner button{
+  width: 10vw;
+  font-weight:900;
+}
+  </style>
+  <title>View Product</title>
+</head>
+
+<body>
+
+
+  <header>
+    <a href="#" class="logo"><img th:src="@{/images/logo/logo.jpg}" alt="" width="60" height="40"></a>
+
+    <ul class="navmenu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Shop</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Contact Us</a></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+
+
+    <div class="nav-icon">
+      <a href="#"><i class="fa fa-search" style="font-size:24px"></i></a>
+
+      <a href="/cart"><i class="fa fa-shopping-cart" style="font-size:24px"></i></i></a>
+
+      <a href="#" id="form-open" style=" color:black; " sec:authorize="isAnonymous()">Login / Register</a>
+
+      <div class="dropdown" sec:authorize="isAuthenticated()">
+
+        <a href="#" onclick="myFunction()" class="dropbtn">My Account</a>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#home">My Profile</a>
+          <a href="#about"><a href="/user/profile">Update Profile</a></a>
+          <a href="#contact"><a th:href="@{/user/logout}">Logout</a></a>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </header>
+  <br><br><br> <br><br><br>
+  <div class="tops" style="position: relative;
+  left: 10%;">
+    <p style="cursor: grab;"> Home | Products | <span th:text="${product.category.name}" style="color: red;"></span></p>
+  </div>
+  <hr style="border:1px solid #e4dede;">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-5 d-flex justify-content-center">
+        <div class="Zoom">
+          <img class="mt-5" height="300px" width="300px" th:src="@{${'/productImages/' + product.imageName}}" alt="">
+        </div>
+
+      </div>
+
+      <div class="col-sm-7 mt-5">
+        <h2 th:text="${product.name}"></h2>
+
+        <div class="stars">
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span> </span>
+          <span style="color: orange;"> 3.5/5</span>
+          <hr style="border: 1px solid black;">
+          <p th:text="${product.description}"></p>
+        </div>
+        <h2>₹ <span th:text="${product.price}"></span></h2>
+        <h5>Weight :
+          <spna th:text="${product.weight}"></spna> grams.
+        </h5><br>
+        <p style="color: blue;">Check Items Availability</p>
+
+        <h6> Not sure what to buy? Check out our Buying Guides </h6>
+        <!-- <a  th:href="#" class="btn btn-primary"  style="border: 1px solid black; border-radius: 35px; background-color: rgb(129, 97, 97); font-size: 25px; font-weight: 400;">
+              <i class="fa fa-heart"></i>
+              Add to cart</a> -->
+
+      </div>
+    </div>
+  </div>
+  <br><br><br>
+  <div class="New_but">
+    <div class="inner">
+      <form th:action="@{/addToCart/{id}(id = ${product.id})}" method="get">
+        <button class="addtocart">
+          <div class="pretext">
+            <i class="fas fa-cart-plus"></i> ADD TO CART
+          </div>
+
+          <div class="pretext done">
+            <div class="posttext"><i class="fas fa-check"></i> ADDED</div>
+          </div>
+        </button>
+      </form>
+    </div>
+    
+
+    <div class="inner">
+      <form th:action="@{/Buynow/{id}(id = ${product.id})}" method="get">
+        <button class="addtocart">
+          <div class="pretext">
+            <i class=" 	fab fa-amazon-pay"></i> Buy Now
+          </div>
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <br>
+  <br><br><br>
+  <section class="contact">
+    <br><br>
+    <div class="contact-info">
+      <br>
+      <div class="first-info">
+
+        <img src="imagea/logo/logo.png" alt="">
+
+        <p>3245 Grant Street Longview, <br> TX united kingdom 765378</p>
+        <p>123456789</p>
+        <p>aniketkumar@gmail.com</p>
+
+        <div class="social-icon">
+          <a href="#"><i class='bx bxl-facebook'></i></a>
+          <a href="#"><i class='bx bxl-twitter'></i></a>
+          <a href="#"><i class='bx bxl-instagram'></i></a>
+          <a href="#"><i class='bx bxl-youtube'></i></a>
+          <a href="#"><i class='bx bxl-linkedin'></i></a>
+        </div>
+      </div>
+
+      <div class="second-info">
+        <h4>Support</h4>
+        <p>Contact us</p>
+        <p>About page</p>
+        <p>Size Guide</p>
+        <p>Shopping & Resturns</p>
+        <p>Privacy</p>
+      </div>
+
+      <div class="third-info">
+        <h4>Shop</h4>
+        <p>Men's Shopping</p>
+        <p>Women's Shopping</p>
+        <p>Kids's Shopping</p>
+        <p>Furniture</p>
+        <p>Discount</p>
+      </div>
+
+      <div class="fourth-info">
+        <h4>Company</h4>
+        <p>About</p>
+        <p>Blog</p>
+        <p>Affiliate</p>
+        <p>Login</p>
+      </div>
+
+      <div class="five">
+        <h4>Subscribe</h4>
+        <p>Receive Updates, Hot Deals, Discounts Sent Straight In Your Inbox Daily</p>
+        <p>Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Eum, Debitis.</p>
+        <p>Receive Updates, Hot Deals, Discounts Sent Straight In Your Inbox Daily</p>
+      </div>
+    </div>
+  </section>
+  <div class="end-text">
+    <p>Copyright © @2022. All Rights Reserved.Designd By Aniket Kumar.</p>
+  </div>
+  <!-- Home -->
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+<script>
+  /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+
+  const button = document.querySelector(".addtocart");
+  const done = document.querySelector(".done");
+  console.log(button);
+  let added = false;
+  button.addEventListener('click', () => {
+    if (added) {
+      done.style.transform = "translate(-110%) skew(-40deg)";
+      added = false;
+    }
+    else {
+      done.style.transform = "translate(0px)";
+      added = true;
+    }
+
+  });
+
+</script>
+
+</html>
