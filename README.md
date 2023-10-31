@@ -15,17 +15,17 @@ Responsive Design: Compatibility across various devices to cater to a diverse au
 
 
 **Technical Skills:**
-Backend Development:
+**Backend Development:**
 
-Proficient in Java Spring Boot for building robust and scalable server-side applications.
+Proficient in **Java Spring Boot** for building robust and scalable server-side applications.
 Implemented RESTful APIs for efficient communication between the frontend and backend.
 Frontend Technologies:
 
-Skilled in utilizing HTML, CSS, and JavaScript to create responsive and visually appealing user interfaces.
+**Skilled in utilizing HTML, CSS, and JavaScript** to create responsive and visually appealing user interfaces.
 Implemented dynamic and interactive elements to enhance the user experience.
 Web Design:
 
-Utilized Bootstrap framework to create a cohesive and mobile-friendly design.
+**Utilized Bootstrap framework to create a cohesive and mobile-friendly design.**
 
 Getting Started
 To get started with the project, follow these steps:
