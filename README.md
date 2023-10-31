@@ -20,21 +20,17 @@ Clone the Repository:
 
 bash
 Copy code
-git clone https://github.com/your-username/online-jewelry-shop.git
+git clone https://github.com/Aniket-kumar404/Jewellery-trade-web-application-With-payment-gateway-Integration.git
+
+Set up database credentials in Application.properties file .
+install some pre Jar file like
+Lombook.jar
+
 Installation:
+1) open Jewellery web Applcation.java File
+2) run file as a Java Application
 
-bash
-Copy code
-cd online-jewelry-shop
-npm install
-Configuration:
-
-Set up database credentials.
 Run the Application:
-
-bash
-Copy code
-npm start
 Open in Browser:
 
 Visit http://localhost:8080 to explore the online jewelry shop locally.
