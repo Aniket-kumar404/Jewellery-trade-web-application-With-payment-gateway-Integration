@@ -23,7 +23,7 @@ import com.jewellery.repository.PlacedOrderRepository;
 import com.jewellery.repository.ProductRepository;
 import com.jewellery.repository.RoleRepository;
 import com.jewellery.repository.UserRepository;
-import com.jewellery.service.PaypalService;
+//import com.jewellery.service.PaypalService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payer;
 import com.paypal.api.payments.PayerInfo;
@@ -42,8 +42,8 @@ public class CartController {
 	ProductRepository productrepo;
 	@Autowired
 	OrderRepository orderrepo;
-	@Autowired
-	PaypalService service;
+//	@Autowired
+//	PaypalService service;
 	@Autowired 
 	PlacedOrderRepository confirmRepo;
 
@@ -87,56 +87,44 @@ public class CartController {
 
 		return "user/shoppingcart";
 	}
-
-	@GetMapping("/BuyNow/{id}")
-	public String buyNowCart(@PathVariable int id,HttpServletRequest request,Model model) {
-		Products pro =productrepo.findById(id).get();
-
-		String email = request.getRemoteUser();
-		// email
-		User user= userrepo.findUserByEmail(email).get();
-		try {
-			Payment payment = service.createPayment(ViewCart.cart.stream().mapToDouble(pro.getPrice(), "USD","paypal",
-					"SALE", "Order Paying", "http://localhost:8080/" + CANCEL_URL,
-					"http://localhost:8008/" + SUCCESS_URL);
-			for(Links link:payment.getLinks()) {
-				if(link.getRel().equals("approval_url")) {
-
-			
-				
-					int user_id = user.getId();
-					OrderDetails order = new OrderDetails();
-					model.addAttribute("orders", order);
-
-					order.setUser_id(user_id);
-					order.setAmount(pro.getPrice());
-			
-					orderrepo.save(order);
-									
-			
-						PlacedOrder confirmOrder = new PlacedOrder();
-						confirmOrder.setOrders(order);
-						confirmOrder.setDescription(pro.getDescription());
-						confirmOrder.setImageName(pro.getImageName());
-						confirmOrder.setName(pro.getName());
-						confirmOrder.setPrice(pro.getPrice());
-						confirmOrder.setWeight(pro.getWeight());
-						confirmRepo.save(confirmOrder);
-					
-					
-			
-		
-					
-					return "redirect:"+link.getHref();
-				}
-			}
-			
-		} catch (PayPalRESTException e) {
-		
-			e.printStackTrace();
-		}
-		return "redirect:/";	
-	}
+//
+//	@GetMapping("/BuyNow/{id}")
+//	public String buyNowCart(@PathVariable int id,HttpServletRequest request,Model model) {
+//		Products pro =productrepo.findById(id).get();
+//
+//		String email = request.getRemoteUser();
+//		// email
+//		User user= userrepo.findUserByEmail(email).get();
+//		try {
+//			Payment payment = service.createPayment(ViewCart.cart.stream().mapToDouble(pro.getPrice(), "USD","paypal",
+//					"SALE", "Order Paying", "http://localhost:8080/" + CANCEL_URL,
+//					"http://localhost:8008/" + SUCCESS_URL));
+//			for(Links link:payment.getLinks()) {
+//				if(link.getRel().equals("approval_url")) {		
+//					int user_id = user.getId();
+//					OrderDetails order = new OrderDetails();
+//					model.addAttribute("orders", order);
+//					order.setUser_id(user_id);
+//					order.setAmount(pro.getPrice());
+//					orderrepo.save(order);	
+//						PlacedOrder confirmOrder = new PlacedOrder();
+//						confirmOrder.setOrders(order);
+//						confirmOrder.setDescription(pro.getDescription());
+//						confirmOrder.setImageName(pro.getImageName());
+//						confirmOrder.setName(pro.getName());
+//						confirmOrder.setPrice(pro.getPrice());
+//						confirmOrder.setWeight(pro.getWeight());
+//						confirmRepo.save(confirmOrder);
+//					return "redirect:"+link.getHref();
+//				}
+//			}
+//			
+//		} catch (PayPalRESTException e) {
+//		
+//			e.printStackTrace();
+//		}
+//		return "redirect:/";	
+//	}
 
 	
 
@@ -150,54 +138,54 @@ public class CartController {
 		return "user/checkout";
 	}
 
-	@PostMapping("/cart/buynow")
-	public String payNow(@ModelAttribute("orders") OrderDetails order,Model model,HttpServletRequest request) {
-		String email = request.getRemoteUser();
-		// email
-		User user= userrepo.findUserByEmail(email).get();
-		try {
-			Payment payment = service.createPayment(ViewCart.cart.stream().mapToDouble(Products::getPrice).sum(), "USD","paypal",
-					"SALE", "Order Paying", "http://localhost:8080/" + CANCEL_URL,
-					"http://localhost:8008/" + SUCCESS_URL);
-			for(Links link:payment.getLinks()) {
-				if(link.getRel().equals("approval_url")) {
-
-					
-				
-					int id = user.getId();
-					model.addAttribute("orders", order);
-					order.setUser_id(id);
-					order.setAmount( ViewCart.cart.stream().mapToDouble(Products::getPrice).sum());
-								orderrepo.save(order);
-									
-					for(Products p: ViewCart.cart) {
-						PlacedOrder confirmOrder = new PlacedOrder();
-						confirmOrder.setOrders(order);
-						confirmOrder.setDescription(p.getDescription());
-						confirmOrder.setImageName(p.getImageName());
-						confirmOrder.setName(p.getName());
-						confirmOrder.setPrice(p.getPrice());
-						confirmOrder.setWeight(p.getWeight());
-						confirmOrder.setOrder_status("Order Placed");
-						confirmOrder.setOrdered_date(String.valueOf(System.currentTimeMillis()));
-						confirmRepo.save(confirmOrder);
-					}
-					
-					ViewCart.cart.clear();
-		
-					
-					return "redirect:"+link.getHref();
-				}
-			}
-			
-		} catch (PayPalRESTException e) {
-		
-			e.printStackTrace();
-		}
-		return "redirect:/";
-	}
-		
-		
+//	@PostMapping("/cart/buynow")
+//	public String payNow(@ModelAttribute("orders") OrderDetails order,Model model,HttpServletRequest request) {
+//		String email = request.getRemoteUser();
+//		// email
+//		User user= userrepo.findUserByEmail(email).get();
+//		try {
+//			Payment payment = service.createPayment(ViewCart.cart.stream().mapToDouble(Products::getPrice).sum(), "USD","paypal",
+//					"SALE", "Order Paying", "http://localhost:8080/" + CANCEL_URL,
+//					"http://localhost:8008/" + SUCCESS_URL);
+//			for(Links link:payment.getLinks()) {
+//				if(link.getRel().equals("approval_url")) {
+//
+//					
+//				
+//					int id = user.getId();
+//					model.addAttribute("orders", order);
+//					order.setUser_id(id);
+//					order.setAmount( ViewCart.cart.stream().mapToDouble(Products::getPrice).sum());
+//								orderrepo.save(order);
+//									
+//					for(Products p: ViewCart.cart) {
+//						PlacedOrder confirmOrder = new PlacedOrder();
+//						confirmOrder.setOrders(order);
+//						confirmOrder.setDescription(p.getDescription());
+//						confirmOrder.setImageName(p.getImageName());
+//						confirmOrder.setName(p.getName());
+//						confirmOrder.setPrice(p.getPrice());
+//						confirmOrder.setWeight(p.getWeight());
+//						confirmOrder.setOrder_status("Order Placed");
+//						confirmOrder.setOrdered_date(String.valueOf(System.currentTimeMillis()));
+//						confirmRepo.save(confirmOrder);
+//					}
+//					
+//					ViewCart.cart.clear();
+//		
+//					
+//					return "redirect:"+link.getHref();
+//				}
+//			}
+//			
+//		} catch (PayPalRESTException e) {
+//		
+//			e.printStackTrace();
+//		}
+//		return "redirect:/";
+//	}
+//		
+//		
 
 	
 	
@@ -210,31 +198,26 @@ public class CartController {
 // public String successPay() {
 //     return "redirect:/";
 // }
-@GetMapping("/success")
-public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
-    try {
-        Payment payment = service.executePayment(paymentId, payerId);
-        System.out.println(payment.toJSON());
-        if (payment.getState().equals("approved")) {
-            Payer payer =payment.getPayer(); 
-          PayerInfo info = payer.getPayerInfo();
-          String Addresss = info.getShippingAddress().toString();
-          System.out.println(Addresss);
-            return "success";
-        }
-    } catch (PayPalRESTException e) {
-     System.out.println(e.getMessage());
-    }
-    return "redirect:/";
-}
+//@GetMapping("/success")
+//public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
+//    try {
+//        Payment payment = service.executePayment(paymentId, payerId);
+//        System.out.println(payment.toJSON());
+//        if (payment.getState().equals("approved")) {
+//            Payer payer =payment.getPayer(); 
+//          PayerInfo info = payer.getPayerInfo();
+//          String Addresss = info.getShippingAddress().toString();
+//          System.out.println(Addresss);
+//            return "success";
+//        }
+//    } catch (PayPalRESTException e) {
+//     System.out.println(e.getMessage());
+//    }
+//    return "redirect:/";
+//}
 //
 //	
 //	
-	
-	
-	
-	
-	
 	
 	
 	
